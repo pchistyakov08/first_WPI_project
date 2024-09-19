@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class WheelSubsystem extends SubsystemBase {
     private CANSparkMax drivingMotor = new CANSparkMax(2, MotorType.kBrushless); 
-    private CANSparkMax turningMotor = new CANSparkMax(deviceId:1, MotorType.kBrushless);
+    private CANSparkMax turningMotor = new CANSparkMax(1, MotorType.kBrushless);
     private CANcoder turningPosition = new CANcoder(1);
   // Thread-safe singleton design pattern.
   private static volatile WheelSubsystem instance;
