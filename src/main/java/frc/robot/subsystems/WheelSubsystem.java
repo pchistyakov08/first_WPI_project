@@ -4,16 +4,20 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class WheelSubsystem extends SubsystemBase {
     private CANSparkMax drivingMotor = new CANSparkMax(2, MotorType.kBrushless); 
+    private CANSparkMax turningMotor = new CANSparkMax(deviceId:1, MotorType.kBrushless);
+    private CANcoder turningPosition = new CANcoder(1);
   // Thread-safe singleton design pattern.
-  private static volatile WheelSubstem instance;
+  private static volatile WheelSubsystem instance;
   private static Object mutex = new Object();
 
 
@@ -30,10 +34,25 @@ public class WheelSubsystem extends SubsystemBase {
       }
       return instance;
   }
-  public void setSpeed(double speed)
+  public void setSpeedForDrivingMotor(double speed)
   {
-    drivingMotor.set(speed);
+
+    drivingMotor.set(speed); 
+
+
   }
+  public void setSpeedForTurningMotor(double speed)
+  {
+    turningMotor.set(speed);
+  }
+  public double getPosition()
+  {
+    return Units.rotationsToDegrees(turningPosition.getAbsolutePosition().getValueAsDouble()); 
+
+  }
+
+
+
 
   
 
