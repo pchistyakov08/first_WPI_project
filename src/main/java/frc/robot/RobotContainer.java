@@ -5,11 +5,10 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.DrivingCommand;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -44,7 +43,7 @@ public class RobotContainer {
   private void configureBindings() {
     m_driverController.x().whileTrue(new DrivingCommand(-0.1));
     m_driverController.a().onTrue(new DrivingCommand(0.1));
-    m_driverController.b().onTrue(Commands.runOnce(() -> CommandScheduler.getInstance().cancelAll())));
+    m_driverController.b().onTrue(Commands.runOnce(() -> CommandScheduler.getInstance().cancelAll()));
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
    // new Trigger(m_exampleSubsystem::exampleCondition)

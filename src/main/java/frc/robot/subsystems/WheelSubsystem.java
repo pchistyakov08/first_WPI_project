@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -13,9 +15,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class WheelSubsystem extends SubsystemBase {
-    private CANSparkMax drivingMotor = new CANSparkMax(2, MotorType.kBrushless); 
-    private CANSparkMax turningMotor = new CANSparkMax(1, MotorType.kBrushless);
-    private CANcoder turningPosition = new CANcoder(1);
+    private CANSparkMax drivingMotor = new CANSparkMax(3, MotorType.kBrushless); 
+    private CANSparkMax turningMotor = new CANSparkMax(2, MotorType.kBrushless);
+    private CANcoder turningPosition = new CANcoder(10, "swerve");
   // Thread-safe singleton design pattern.
   private static volatile WheelSubsystem instance;
   private static Object mutex = new Object();
@@ -60,11 +62,18 @@ public class WheelSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private WheelSubsystem() {
       super("ExampleSubsystem");
+      MagnetSensorConfigs config = new MagnetSensorConfigs();
+      config.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1;
+      this.turningPosition.getConfigurator().apply(config);
+
+
   }
 
 
   @Override
   public void periodic() {
+
+    
       // This method will be called once per scheduler run
   }
 
